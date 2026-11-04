@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promote Pattern</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/github-markdown.css">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .markdown-body { font-size: 16px; }
+        pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #d0d7de; padding: 0.5rem; text-align: left; }
+        th { background: #f6f8fa; }
+        a { color: #0969da; }
+        .toc { background: #f6f8fa; padding: 1rem; border-radius: 6px; margin-bottom: 2rem; }
+        .toc ul { list-style: none; padding-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <hr />
+<p>id: 20261103-0732
+type: fleeting
+author: human
+tags: [promote-pattern, workflow]
+status: active</p>
+<hr />
+<h1 id="promote-fleeting-permanent-pattern"><a class="toclink" href="#promote-fleeting-permanent-pattern">Promote Fleeting → Permanent Pattern</a></h1>
+<p>A repeatable workflow for turning a fleeting entry into permanent human and agent learning notes.</p>
+<h2 id="stepbystep"><a class="toclink" href="#stepbystep">Step‑by‑Step</a></h2>
+<ol>
+<li><strong>Create a fleeting note</strong> in <code>/fleeting</code> with a timestamped slug (e.g., <code>fleeting-session-note-20261103.md</code>).  </li>
+<li>Include a <code>## Prompt</code> section and a <code>## Observations</code> section.  </li>
+<li>
+<p>Add a <code>## References</code> block linking to <code>[[categories]]</code> and <code>[[000-baseline-index]]</code>.</p>
+</li>
+<li>
+<p><strong>Review the fleeting entry</strong> (manually or via a short‑circuit script).  </p>
+</li>
+<li>Identify concepts mastered by the human → create/update a note in <code>/literature/human</code>.  </li>
+<li>
+<p>Identify gaps bridged by Hermes → create/update a note in <code>/literature/agent</code>.</p>
+</li>
+<li>
+<p><strong>Create the human progress note</strong> (if new) or append to an existing one.  </p>
+</li>
+<li>Use the same <code>id</code> pattern: <code>YYYYMMDD-HHMM</code>.  </li>
+<li>
+<p>Include a <code>## References</code> section linking to <code>[[categories]]</code>, <code>[[000-baseline-index]]</code>, and the originating fleeting note (e.g., <code>[[fleeting-session-note-20261103]]</code>).</p>
+</li>
+<li>
+<p><strong>Create the agent progress note</strong> (if new) or append to an existing one.  </p>
+</li>
+<li>Same <code>id</code> pattern, with <code>author: hermes</code>.  </li>
+<li>
+<p>Link back the fleeting note in <code>## References</code>.</p>
+</li>
+<li>
+<p><strong>Archive or delete the fleeting note</strong>  </p>
+</li>
+<li>Option A: Move it to an <code>/archive/fleeting</code> sub‑folder and keep a WikiLink reference.  </li>
+<li>
+<p>Option B: Delete it if no longer needed, but ensure the human/agent notes retain the link for provenance.</p>
+</li>
+<li>
+<p><strong>Update the garden overview</strong>  </p>
+</li>
+<li>Re‑run the synthesis note (<code>permanent/synthesis-20261103.md</code>) or regenerate a “current state” view using Quartz graph features.</li>
+</ol>
+<h2 id="provenance-example"><a class="toclink" href="#provenance-example">Provenance Example</a></h2>
+<div class="highlight"><pre><span></span><code><span class="err">##</span><span class="w"> </span><span class="k">References</span>
+
+<span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">[categories</span><span class="o">]</span><span class="err">]</span>
+<span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">[000-baseline-index</span><span class="o">]</span><span class="err">]</span>
+<span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">[fleeting-session-note-20261103</span><span class="o">]</span><span class="err">]</span>
+<span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">[human-progress-20261103</span><span class="o">]</span><span class="err">]</span>
+<span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">[agent-progress-20261103</span><span class="o">]</span><span class="err">]</span>
+</code></pre></div>
+
+<h2 id="tips"><a class="toclink" href="#tips">Tips</a></h2>
+<ul>
+<li>Keep the fleeting note <strong>short</strong> (a few sentences). If it grows, consider promoting it sooner.</li>
+<li>Use <strong>consistent tagging</strong> (<code>ags: [learning-tracker, promote]</code>) so the entries are searchable.</li>
+<li>After promoting, <strong>run a quick link‑check</strong> (<code>git grep '\['</code> or Obsidian link validator) to ensure no orphan WikiLinks remain.</li>
+</ul>
+    </article>
+</body>
+</html>

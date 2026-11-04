@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Index</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/github-markdown.css">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .markdown-body { font-size: 16px; }
+        pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #d0d7de; padding: 0.5rem; text-align: left; }
+        th { background: #f6f8fa; }
+        a { color: #0969da; }
+        .toc { background: #f6f8fa; padding: 1rem; border-radius: 6px; margin-bottom: 2rem; }
+        .toc ul { list-style: none; padding-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <hr />
+<p>id: 20261103-0734
+type: permanent
+author: human
+tags: [search, index, navigation]
+status: active</p>
+<hr />
+<h1 id="search-index"><a class="toclink" href="#search-index">Search &amp; Index</a></h1>
+<p>This note serves as the central index for the Hermes‑Zettel garden. Quartz (the static‑site generator used by this repository) automatically builds a searchable page from WikiLinks and frontmatter tags, but this note gathers the most useful cross‑references in one place for quick manual navigation.</p>
+<h2 id="humanfocused-entries"><a class="toclink" href="#humanfocused-entries">Human‑focused entries</a></h2>
+<ul>
+<li>[[human-progress-20261103]] – What I learned about setting up the Zettelkasten.</li>
+<li>[[categories]] – Tag/categorisation catalogue.</li>
+</ul>
+<h2 id="agentfocused-entries"><a class="toclink" href="#agentfocused-entries">Agent‑focused entries</a></h2>
+<ul>
+<li>[[agent-progress-20261103]] – Context gaps bridged during infrastructure setup.</li>
+<li>[[000-baseline-index]] – Root milestone that anchors all other notes.</li>
+</ul>
+<h2 id="quicklink-map"><a class="toclink" href="#quicklink-map">Quick‑link map</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Linked note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline</td>
+<td>[[000-baseline-index]]</td>
+</tr>
+<tr>
+<td>Categories</td>
+<td>[[categories]]</td>
+</tr>
+<tr>
+<td>Human progress</td>
+<td>[[human-progress-20261103]]</td>
+</tr>
+<tr>
+<td>Agent progress</td>
+<td>[[agent-progress-20261103]]</td>
+</tr>
+<tr>
+<td>Synthesis</td>
+<td>[[synthesis-20261103]]</td>
+</tr>
+<tr>
+<td>Session Progress</td>
+<td>[[session-progress-20261103-2040]]</td>
+</tr>
+<tr>
+<td>Context Handoff</td>
+<td>[[context-handoff-latest]]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-quartz-uses-this-file"><a class="toclink" href="#how-quartz-uses-this-file">How Quartz uses this file</a></h2>
+<ul>
+<li>Every WikiLink <code>[[…]]</code> in any <code>.md</code> file under the repository is parsed and added to the site‑wide search index.</li>
+<li>Tags declared in YAML frontmatter (<code>tags: [...]</code>) are also indexed, allowing filter‑by‑tag pages.</li>
+<li>This note itself contains multiple links, so it appears in the graph view and can be reached from the “Search” textbox on the deployed site.</li>
+</ul>
+<h2 id="future-extensions"><a class="toclink" href="#future-extensions">Future extensions</a></h2>
+<ul>
+<li>Add new entries here as the garden grows.</li>
+<li>Introduce tag‑specific index notes (e.g., <code>permanent/index-prompt-engineering.md</code>) if the tag count becomes large.</li>
+<li>Integrate with an external search engine (e.g., Algolia) by exporting the frontmatter data, but for now Quartz’s built‑in search is sufficient.</li>
+</ul>
+    </article>
+</body>
+</html>

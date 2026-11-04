@@ -25,7 +25,6 @@ out/
 target/
 bin/
 obj/
-_site/
 
 # ==========================================
 # Logs and Databases

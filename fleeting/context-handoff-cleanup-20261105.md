@@ -2,8 +2,8 @@
 id: 20261105-0625
 type: fleeting
 author: hermes
-tags: [context-handoff, cleanup, git, deduplication]
-status: active
+tags: [context-handoff, cleanup, git, deduplication, promoted]
+status: promoted
 ---
 # Session Progress: Context Handoff Deduplication Cleanup (2026-11-05)
 
@@ -37,3 +37,10 @@ Cleaned up obsolete context handoff files that were created during the initial i
 - `git status` shows clean working tree on master
 - All context handoff files present and accounted for
 - Generation script unchanged and functional
+
+## References
+
+- [[context-handoff-deduplication-20261105]] — Agent literature: deduplication system details
+- [[git-cleanup-workflow-20261105]] — Human literature: git cleanup workflow
+- [[categories]]
+- [[000-baseline-index]]

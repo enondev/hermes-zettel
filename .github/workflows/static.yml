@@ -22,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
+  # Deploy job - deploys the pre-built _site/ to GitHub Pages
   deploy:
     environment:
       name: github-pages
@@ -36,8 +36,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Upload pre-built _site/ directory
+          path: '_site/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

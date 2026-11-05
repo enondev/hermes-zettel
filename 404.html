@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — Hermes-Zettel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+        }
+        .description {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 2.5rem;
+            text-align: left;
+            background: #f8f9fc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 2px solid #e8ebf3;
+            border-radius: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .nav-link:hover {
+            border-color: #667eea;
+            background: #f0f2fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            text-decoration: none;
+        }
+        .nav-link.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            color: white;
+        }
+        .nav-link.primary:hover {
+            background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+            border-color: transparent;
+            color: white;
+        }
+        .icon {
+            font-size: 1.25rem;
+        }
+        .search-hint {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e8ebf3;
+        }
+        footer {
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-link {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1>Page Not Found</h1>
+        <p class="subtitle">The note you're looking for has wandered off into the digital garden...</p>
+        
+        <div class="description">
+            <p>It looks like this path doesn't exist — perhaps it was never planted, or it grew in a different direction. No worries, the garden is vast and there's plenty to explore.</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="/" class="nav-link primary">
+                <span class="icon">🏠</span> Back to Home
+            </a>
+            <a href="/fleeting/" class="nav-link">
+                <span class="icon">📝</span> Fleeting Notes
+            </a>
+            <a href="/literature/" class="nav-link">
+                <span class="icon">📚</span> Literature Notes
+            </a>
+            <a href="/permanent/" class="nav-link">
+                <span class="icon">🌳</span> Permanent Notes
+            </a>
+            <a href="/permanent/context-handoff-latest.md" class="nav-link">
+                <span class="icon">🔄</span> Context Handoffs
+            </a>
+            <a href="/permanent/search-index.md" class="nav-link">
+                <span class="icon">🔍</span> Search Index
+            </a>
+        </div>
+
+        <p class="search-hint">
+            <strong>Tip:</strong> Use the search index or browse the main sections above to find what you need. Every note in this garden is connected — you're never far from where you want to be.
+        </p>
+
+        <footer>
+            <p>Generated by <a href="https://github.com/enondev/hermes-zettel" target="_blank">Hermes-Zettel</a> — Dual-learning context ledger for humans and agents</p>
+            <p>Deployed via GitHub Pages • Built on Zettelkasten principles</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -5,9 +5,15 @@ Converts Markdown files to HTML and outputs to _site/ directory.
 """
 import os
 import shutil
+import sys
 from pathlib import Path
 import markdown
 from markdown.extensions import codehilite, fenced_code, tables, toc
+
+# Add scripts directory to path for importing generate_context_handoff
+SCRIPTS_DIR = Path(__file__).parent
+sys.path.insert(0, str(SCRIPTS_DIR))
+import generate_context_handoff
 
 # Configuration
 SOURCE_DIR = Path(".")
@@ -106,6 +112,10 @@ def copy_static_files() -> None:
 def build() -> None:
     """Main build function."""
     print("Starting build...")
+
+    # Generate context handoff (updates permanent/context-handoff-latest.md)
+    print("Generating context handoff...")
+    generate_context_handoff.main()
 
     # Clean output directory
     if OUTPUT_DIR.exists():

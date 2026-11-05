@@ -33,7 +33,7 @@ MARKDOWN_EXTENSIONS = [
 CONTENT_DIRS = ["fleeting", "literature", "permanent"]
 
 # Files/directories to copy as-is
-STATIC_FILES = ["index.html", "LICENSE.txt", "README.md", ".gitignore", "_headers"]
+STATIC_FILES = ["index.html", "LICENSE.txt", "README.md", ".gitignore", "_headers", "style.css", "github-markdown.css"]
 STATIC_DIRS = []  # Add any static asset directories here (css, js, images)
 
 
@@ -109,6 +109,82 @@ def copy_static_files() -> None:
             print(f"Copied directory: {src} -> {dst}")
 
 
+def generate_directory_index(output_dir: Path, title: str) -> None:
+    """Generate an index.html for a directory listing all HTML files in it."""
+    html_files = list(output_dir.glob("*.html"))
+    subdirs = [d for d in output_dir.iterdir() if d.is_dir()]
+
+    if not html_files and not subdirs:
+        return
+
+    # Template for directory index pages
+    DIR_INDEX_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - Hermes Zettel</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/github-markdown.css">
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 2rem; }}
+        .markdown-body {{ font-size: 16px; }}
+        pre {{ background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; }}
+        code {{ background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }}
+        pre code {{ background: none; padding: 0; }}
+        table {{ border-collapse: collapse; width: 100%; margin: 1rem 0; }}
+        th, td {{ border: 1px solid #d0d7de; padding: 0.5rem; text-align: left; }}
+        th {{ background: #f6f8fa; }}
+        a {{ color: #0969da; }}
+        .toc {{ background: #f6f8fa; padding: 1rem; border-radius: 6px; margin-bottom: 2rem; }}
+        .toc ul {{ list-style: none; padding-left: 1.5rem; }}
+        .file-list {{ list-style: none; padding: 0; }}
+        .file-list li {{ padding: 0.5rem 0; border-bottom: 1px solid #e1e4e8; }}
+        .file-list li:last-child {{ border-bottom: none; }}
+        .file-list a {{ text-decoration: none; font-weight: 500; }}
+        .file-list a:hover {{ text-decoration: underline; }}
+        .back-link {{ display: inline-block; margin-bottom: 1.5rem; color: #0969da; text-decoration: none; }}
+        .back-link:hover {{ text-decoration: underline; }}
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← Back to Home</a>
+    <h1>{title}</h1>
+    <ul class="file-list">
+{file_links}
+    </ul>
+</body>
+</html>"""
+
+    file_links = []
+
+    # Add subdirectory links first
+    for subdir in sorted(subdirs, key=lambda d: d.name.lower()):
+        file_links.append(f'        <li><a href="{subdir.name}/">{subdir.name.title()}/</a></li>')
+
+    # Sort files: index.html first (if exists), then alphabetically
+    html_files.sort(key=lambda f: (f.name != "index.html", f.name.lower()))
+
+    for html_file in html_files:
+        if html_file.name == "index.html":
+            continue  # Don't link to itself
+        # Create a readable title from the filename
+        display_name = html_file.stem.replace('-', ' ').replace('_', ' ').title()
+        file_links.append(f'        <li><a href="{html_file.name}">{display_name}</a></li>')
+
+    if not file_links:
+        return
+
+    index_content = DIR_INDEX_TEMPLATE.format(
+        title=title,
+        file_links="\n".join(file_links)
+    )
+
+    index_path = output_dir / "index.html"
+    index_path.write_text(index_content, encoding="utf-8")
+    print(f"Generated directory index: {index_path}")
+
+
 def build() -> None:
     """Main build function."""
     print("Starting build...")
@@ -138,6 +214,18 @@ def build() -> None:
     # Copy static files
     copy_static_files()
 
+    # Generate directory indexes for all content directories
+    for content_dir in CONTENT_DIRS:
+        output_subdir = OUTPUT_DIR / content_dir
+        if output_subdir.exists() and output_subdir.is_dir():
+            generate_directory_index(output_subdir, content_dir.title())
+
+    # Also generate indexes for literature subdirectories
+    for subdir in ["literature/agent", "literature/human"]:
+        output_subdir = OUTPUT_DIR / subdir
+        if output_subdir.exists() and output_subdir.is_dir():
+            generate_directory_index(output_subdir, subdir.replace('/', ' / ').title())
+
     # Create a simple index.html if it doesn't exist in output
     index_path = OUTPUT_DIR / "index.html"
     if not index_path.exists():
@@ -148,18 +236,18 @@ def build() -> None:
             # Generate a basic index
             with open(index_path, "w", encoding="utf-8") as f:
                 f.write("""<!DOCTYPE html>
-<html lang="en">
-<head>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hermes Zettel</title>
     <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+    </head>
+    <body>
     <h1>Hermes Zettel</h1>
     <p>Welcome to the Hermes Zettelkasten.</p>
-</body>
-</html>""")
+    </body>
+    </html>""")
             print("Created default index.html")
 
     print(f"Build complete! Output in {OUTPUT_DIR}")

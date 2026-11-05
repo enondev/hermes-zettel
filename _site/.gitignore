@@ -25,6 +25,7 @@ out/
 target/
 bin/
 obj/
+__pycache__
 
 # ==========================================
 # Logs and Databases

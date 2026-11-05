@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Handoff Deduplication 20261105</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/github-markdown.css">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .markdown-body { font-size: 16px; }
+        pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #d0d7de; padding: 0.5rem; text-align: left; }
+        th { background: #f6f8fa; }
+        a { color: #0969da; }
+        .toc { background: #f6f8fa; padding: 1rem; border-radius: 6px; margin-bottom: 2rem; }
+        .toc ul { list-style: none; padding-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <hr />
+<p>id: 20261105-0625
+type: agent
+author: hermes
+tags: [context-handoff, deduplication, git, cleanup, automation]
+status: active</p>
+<hr />
+<h1 id="context-handoff-deduplication-system"><a class="toclink" href="#context-handoff-deduplication-system">Context Handoff Deduplication System</a></h1>
+<p><strong>Originating fleeting note:</strong> [[context-handoff-cleanup-20261105]]</p>
+<h2 id="overview"><a class="toclink" href="#overview">Overview</a></h2>
+<p>The <code>scripts/generate_context_handoff.py</code> script includes a deduplication mechanism that prevents generating redundant timestamped context handoff files when the garden content hasn't actually changed.</p>
+<h2 id="how-deduplication-works"><a class="toclink" href="#how-deduplication-works">How Deduplication Works</a></h2>
+<p>The script normalizes handoff content before computing a content hash:</p>
+<ol>
+<li><strong>Frontmatter normalization</strong> — Strips <code>id:</code> and <code>generated:</code> fields from frontmatter (these change on every run but don't reflect garden state changes)</li>
+<li><strong>Body normalization</strong> — Replaces dynamic timestamps in the title and body with a <code>TIMESTAMP</code> placeholder:</li>
+<li><code># Context Handoff: Garden State (2026-11-05 06:25)</code> → <code># Context Handoff: Garden State (TIMESTAMP)</code></li>
+<li><code>This note encapsulates... as of 2026-11-05 06:25</code> → <code>... as of TIMESTAMP</code></li>
+<li><code>- Timestamp: 20261105-0625</code> → <code>- Timestamp: TIMESTAMP</code></li>
+<li><strong>Hash comparison</strong> — Computes SHA256 of normalized content and compares against the existing <code>context-handoff-latest.md</code> hash</li>
+<li><strong>Skip generation</strong> — If hashes match, no new files are created; only a log message is printed</li>
+</ol>
+<h2 id="cleanup-performed-2026-11-05"><a class="toclink" href="#cleanup-performed-2026-11-05">Cleanup Performed (2026-11-05)</a></h2>
+<h3 id="removed"><a class="toclink" href="#removed">Removed</a></h3>
+<ul>
+<li><code>permanent/context-handoff-20261103-2031.md</code> — First handoff from initial integration; self-referential (linked to itself and <code>context-handoff-latest</code>)</li>
+</ul>
+<h3 id="retained-valid-history"><a class="toclink" href="#retained-valid-history">Retained (Valid History)</a></h3>
+<ul>
+<li><code>permanent/context-handoff-20261103-2124.md</code> — Valid snapshot from 2026-11-03 21:24</li>
+<li><code>permanent/context-handoff-20261104-2022.md</code> — Valid snapshot from 2026-11-04 20:22 (renamed from 2031 during rebase)</li>
+<li><code>permanent/context-handoff-latest.md</code> — Current stable "latest" copy</li>
+</ul>
+<h3 id="notes"><a class="toclink" href="#notes">Notes</a></h3>
+<ul>
+<li>Files referenced in earlier task tracking (2032, 2034, 2040) never existed in the repository — created and deleted during local testing before initial commit</li>
+<li>Commit <code>c0b82d3</code> on master contains this cleanup</li>
+</ul>
+<h2 id="git-workflow-used"><a class="toclink" href="#git-workflow-used">Git Workflow Used</a></h2>
+<ol>
+<li>Created branch <code>chore/git-cleanup-context-handoff</code> from worktree</li>
+<li>Deleted obsolete file <code>context-handoff-20261103-2031.md</code></li>
+<li>Committed with conventional commit message</li>
+<li>Merged to master via fast-forward</li>
+<li>Rebased onto remote master (divergent history)</li>
+<li>Pushed to origin/master</li>
+</ol>
+<h2 id="verification"><a class="toclink" href="#verification">Verification</a></h2>
+<ul>
+<li><code>git status</code> shows clean working tree on master</li>
+<li>All context handoff files present and accounted for</li>
+<li>Generation script unchanged and functional</li>
+</ul>
+<h2 id="references"><a class="toclink" href="#references">References</a></h2>
+<ul>
+<li>[[context-handoff-cleanup-20261105]]</li>
+<li>[[categories]]</li>
+<li>[[000-baseline-index]]</li>
+<li>[[scripts/generate_context_handoff.py]]</li>
+</ul>
+    </article>
+</body>
+</html>
